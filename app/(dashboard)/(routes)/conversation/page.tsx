@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import axios from "axios";
 import { MessageSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -12,8 +13,12 @@ import { formSchema } from "./constants";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { ChatCompletionMessageParam } from "openai/resources/chat/index";
+import { Empty } from "@/components/empty";
+import Loader from "@/components/loader";
+import { cn } from "@/lib/utils";
+import { UserAvatar } from "@/components/userAvatar";
+import {BotAvatar} from "@/components/botAvatar";
 
 const Conversation = () => {
     const router = useRouter();
@@ -72,7 +77,7 @@ const Conversation = () => {
                                     <FormItem className="col-span-12 lg:col-span-10 w-full">
                                         <FormControl className="m-0 p-0">
                                             <Input
-                                                className="border-0 outline-none focus-visible:ring-0focus-visible:ring-transparent"
+                                                className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                                                 disabled={isLoading}
                                                 placeholder="How to make a website?"
                                                 {...field}
@@ -92,12 +97,30 @@ const Conversation = () => {
                     </Form>
                 </div>
 
-                <div className="space-y-4 mt-4">
+                <div className="space-y-4 mt-8">
+
+                    {
+                        isLoading && (
+                            <Loader />
+                        )
+                    }
+
+                    {
+                        messages.length === 0 && !isLoading && (
+                            <Empty label="No conversations yet" />
+                        )
+                    }
                     <div className="flex flex-col-reverse gap-y-4">
                         {
                             messages.map((message, idx) => (
-                                <div key={idx}>
-                                    {message.content}
+                                <div
+                                    key={idx}
+                                    className={cn("p-4 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10" : "bg-gray-500/10")}
+                                >
+                                    {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
+                                    <p className="text-sm">
+                                        {message.content}
+                                    </p>
                                 </div>
                             ))
                         }
