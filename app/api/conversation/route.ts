@@ -18,7 +18,7 @@ export async function POST(req: Request) {
         }
 
         if (!openai.apiKey) {
-            return new NextResponse("OPENAI_NOT_AUTHORIZEDUNAUTHORIZED", { status: 500 });
+            return new NextResponse("OPENAI_NOT_AUTHORIZED", { status: 500 });
         }
 
         if (!messages) {
