@@ -103,14 +103,12 @@ const VideoPage = () => {
                     }
 
                     {video && (
-                        <div className="h-70 w-90 flex items-center justify-center">
-                            <video
-                                className="w-full aspect-video rounded-lg border bg-black"
-                                controls
-                            >
-                                <source src={video} />
-                            </video>
-                        </div>
+                        <video
+                            className="w-full aspect-video rounded-lg border bg-black"
+                            controls
+                        >
+                            <source src={video} />
+                        </video>
                     )}
                 </div>
             </div>
