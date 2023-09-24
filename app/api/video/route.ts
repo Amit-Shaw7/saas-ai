@@ -1,3 +1,4 @@
+import { checkQueryCountVlaid, incrementQueryCount } from "@/lib/api-limit";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
@@ -21,6 +22,11 @@ export async function POST(req: Request) {
             return new NextResponse("PROMPT_IS_REQUIRED", { status: 400 });
         }
 
+        const freeTrial = await checkQueryCountVlaid();
+        if (!freeTrial) {
+            return new NextResponse("QUERY_LIMIT_EXCEEDED", { status: 403 });
+        }
+
         const response = await replicate.run(
             "cjwbw/damo-text-to-video:1e205ea73084bd17a0a3b43396e49ba0d6bc2e754e9283b2df49fad2dcf95755",
             {
@@ -29,6 +35,8 @@ export async function POST(req: Request) {
                 }
             }
         );
+
+        await incrementQueryCount();
 
         return NextResponse.json(response);
     } catch (error) {

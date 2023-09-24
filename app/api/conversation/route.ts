@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
+import { checkQueryCountVlaid, incrementQueryCount } from "@/lib/api-limit";
 
 import OpenAI from 'openai';
 
@@ -25,10 +26,17 @@ export async function POST(req: Request) {
             return new NextResponse("MSG_REQUIRED", { status: 400 });
         }
 
+        const freeTrial = await checkQueryCountVlaid();
+        if (!freeTrial) {
+            return new NextResponse("QUERY_LIMIT_EXCEEDED", { status: 403 });
+        }
+
         const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages
         });
+
+        await incrementQueryCount();
 
         return NextResponse.json(response.choices[0].message)
     } catch (error) {

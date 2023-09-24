@@ -1,3 +1,4 @@
+import { checkQueryCountVlaid, incrementQueryCount } from "@/lib/api-limit";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
@@ -31,11 +32,18 @@ export async function POST(req: Request) {
             return new NextResponse("AMOUNT_IS_REQUIRED", { status: 400 });
         }
 
+        const freeTrial = await checkQueryCountVlaid();
+        if (!freeTrial) {
+            return new NextResponse("QUERY_LIMIT_EXCEEDED", { status: 403 });
+        }
+
         const response = await openai.images.generate({
             prompt,
             n: parseInt(amount, 10),
             size: resolution
         });
+
+        await incrementQueryCount();
 
         return NextResponse.json(response.data)
     } catch (error) {
