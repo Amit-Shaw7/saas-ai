@@ -40,3 +40,14 @@ export const checkQueryCountVlaid = async () => {
         
     }
 }
+
+export const getQueryCount = async () => {
+    await connectToMongo();
+    const { userId } = auth();
+    if (!userId) {
+        return 0;
+    }
+
+    const limitQuery = await LimitQuery.findOne({ userId });
+    return limitQuery.queryCount;
+}

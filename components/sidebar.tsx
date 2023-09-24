@@ -4,7 +4,16 @@ import Image from "next/image";
 import { Montserrat } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Code, ImageIcon, LayoutDashboard, MessageSquare, Music, Settings, VideoIcon } from "lucide-react";
+import {
+    Code,
+    ImageIcon,
+    LayoutDashboard,
+    MessageSquare,
+    Music,
+    Settings,
+    VideoIcon
+} from "lucide-react";
+import FreeQueryCounter from "@/components/freeQueryCounter";
 
 const montserrat = Montserrat({
     weight: "600",
@@ -53,8 +62,13 @@ const routes = [
         href: "/settings",
         // color: "text-emerald-500"
     },
-]
-const Sidebar = () => {
+];
+
+interface SidebarProps {
+    queryCount: number;
+};
+
+const Sidebar = ({ queryCount = 0 }: SidebarProps) => {
     const pathname = usePathname();
     return (
         <div className="py-4 flex flex-col h-full text-white bg-[#111827]">
@@ -93,7 +107,9 @@ const Sidebar = () => {
                     }
                 </div>
             </div>
-
+            <FreeQueryCounter
+                queryCount={queryCount}
+            />
         </div>
     )
 };
