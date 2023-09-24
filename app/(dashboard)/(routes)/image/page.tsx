@@ -45,8 +45,7 @@ const Imagepage = () => {
             const response = await axios.post("/api/image", values);
             const urls = response.data.map((image: { url: string }) => image.url);
             setImages(urls);
-            console.log(values);
-
+            form.reset();
         } catch (error) {
             console.log(error);
             // Todo - Open Upgrade modal
@@ -201,7 +200,7 @@ const Imagepage = () => {
                                             className="w-full"
                                             onClick={() => window.open(image)}
                                         >
-                                            <Download className="h-4 w-4 mr-2"/>
+                                            <Download className="h-4 w-4 mr-2" />
                                             Downlaod
                                         </Button>
                                     </CardFooter>
