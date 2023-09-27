@@ -15,8 +15,10 @@ import { Button } from "@/components/ui/button";
 import { Empty } from "@/components/empty";
 import Loader from "@/components/loader";
 import { useState } from "react";
+import { useApp } from "@/store/AppContext";
 
 const VideoPage = () => {
+    const { onOpen } = useApp();
     const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -36,9 +38,10 @@ const VideoPage = () => {
             const response = await axios.post("/api/video", values);
             setVideo(response.data);
             form.reset();
-        } catch (error) {
-            console.log(error);
-            // Todo - Open Upgrade modal
+        } catch (error: any) {
+            if (error?.response?.status === 403) {
+                onOpen();
+            }
         } finally {
             router.refresh();
         }

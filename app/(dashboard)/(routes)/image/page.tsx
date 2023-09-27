@@ -22,8 +22,11 @@ import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Image from "next/image";
 import { Card, CardFooter } from "@/components/ui/card";
+import { useApp } from "@/store/AppContext";
 
 const Imagepage = () => {
+    const { onOpen } = useApp();
+
     const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -46,9 +49,10 @@ const Imagepage = () => {
             const urls = response.data.map((image: { url: string }) => image.url);
             setImages(urls);
             form.reset();
-        } catch (error) {
-            console.log(error);
-            // Todo - Open Upgrade modal
+        } catch (error: any) {
+            if (error?.response?.status === 403) {
+                onOpen();
+            }
         } finally {
             router.refresh();
         }

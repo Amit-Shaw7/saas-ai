@@ -5,12 +5,14 @@ import { MAX_FREE_COUNT } from "@/constants";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Zap } from "lucide-react";
+import { useApp } from "@/store/AppContext";
 
 interface FreeCounterProps {
     queryCount: number
 }
 
 const FreeQueryCounter = ({ queryCount = 0 }: FreeCounterProps) => {
+    const { onOpen } = useApp();
 
     const [mounted, setMounted] = useState(false);
     useEffect(() => {
@@ -29,6 +31,7 @@ const FreeQueryCounter = ({ queryCount = 0 }: FreeCounterProps) => {
                         />
                     </div>
                     <Button
+                        onClick={onOpen}
                         className="w-full"
                         variant="premium"
                     >

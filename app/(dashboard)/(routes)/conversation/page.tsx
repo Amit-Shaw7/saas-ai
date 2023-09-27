@@ -18,9 +18,11 @@ import { Empty } from "@/components/empty";
 import Loader from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/userAvatar";
-import {BotAvatar} from "@/components/botAvatar";
+import { BotAvatar } from "@/components/botAvatar";
+import { useApp } from "@/store/AppContext";
 
 const Conversation = () => {
+    const { onOpen } = useApp();
     const router = useRouter();
     const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
     const form = useForm<z.infer<typeof formSchema>>({
@@ -46,9 +48,10 @@ const Conversation = () => {
 
             setMessages((prev) => [...prev, userMessage, response.data])
             form.reset();
-        } catch (error) {
-            console.log(error);
-            // Todo - Open Upgrade modal
+        } catch (error: any) {
+            if (error?.response?.status === 403) {
+                onOpen();
+            }
         } finally {
             router.refresh();
         }

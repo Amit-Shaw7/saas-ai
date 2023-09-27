@@ -15,9 +15,11 @@ import { Button } from "@/components/ui/button";
 import { Empty } from "@/components/empty";
 import Loader from "@/components/loader";
 import { useState } from "react";
+import { useApp } from "@/store/AppContext";
 
 const MusicPage = () => {
     const router = useRouter();
+    const { onOpen } = useApp();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -35,12 +37,13 @@ const MusicPage = () => {
             setMusic(undefined);
             const response = await axios.post("/api/music", values);
             console.log(response.data.audio);
-            
+
             setMusic(response.data.audio);
             form.reset();
-        } catch (error) {
-            console.log(error);
-            // Todo - Open Upgrade modal
+        } catch (error: any) {
+            if (error?.response?.status === 403) {
+                onOpen();
+            }
         } finally {
             router.refresh();
         }

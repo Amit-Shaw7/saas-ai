@@ -20,9 +20,11 @@ import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/userAvatar";
 import { BotAvatar } from "@/components/botAvatar";
 import ReactMarkdown from "react-markdown";
+import { useApp } from "@/store/AppContext";
 
 const Codepage = () => {
     const router = useRouter();
+    const {onOpen} = useApp();
     const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -47,9 +49,10 @@ const Codepage = () => {
 
             setMessages((prev) => [...prev, userMessage, response.data])
             form.reset();
-        } catch (error) {
-            console.log(error);
-            // Todo - Open Upgrade modal
+        } catch (error: any) {
+            if (error?.response?.status === 403) {
+                onOpen();
+            }
         } finally {
             router.refresh();
         }
@@ -127,7 +130,7 @@ const Codepage = () => {
                                                     <pre {...props} />
                                                 </div>
                                             ),
-                                            code : ({node , ...props}) => (
+                                            code: ({ node, ...props }) => (
                                                 <code className="bg-black/10 rounded-lg p-1" {...props} />
                                             )
                                         }}
