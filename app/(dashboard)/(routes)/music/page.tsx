@@ -32,11 +32,9 @@ const MusicPage = () => {
     const [music, setMusic] = useState<string>();
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values);
         try {
             setMusic(undefined);
             const response = await axios.post("/api/music", values);
-            console.log(response.data.audio);
 
             setMusic(response.data.audio);
             form.reset();

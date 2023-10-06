@@ -17,9 +17,10 @@ import { ChatCompletionMessageParam } from "openai/resources/chat/index";
 import { Empty } from "@/components/empty";
 import Loader from "@/components/loader";
 import { cn } from "@/lib/utils";
+// import { BotAvatar } from "@/components/botAvatar";
+import { useApp } from "@/store/AppContext";
 import { UserAvatar } from "@/components/userAvatar";
 import { BotAvatar } from "@/components/botAvatar";
-import { useApp } from "@/store/AppContext";
 
 const Conversation = () => {
     const { onOpen } = useApp();
@@ -35,7 +36,6 @@ const Conversation = () => {
     const isLoading = form.formState.isSubmitting;
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values);
         try {
             const userMessage: ChatCompletionMessageParam = {
                 role: "user",

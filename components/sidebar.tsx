@@ -4,71 +4,20 @@ import Image from "next/image";
 import { Montserrat } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import {
-    Code,
-    ImageIcon,
-    LayoutDashboard,
-    MessageSquare,
-    Music,
-    Settings,
-    VideoIcon
-} from "lucide-react";
 import FreeQueryCounter from "@/components/freeQueryCounter";
+import { routes } from "@/constants";
 
 const montserrat = Montserrat({
     weight: "600",
     subsets: ["latin"],
 });
-const routes = [
-    {
-        label: "Dashboard",
-        icon: LayoutDashboard,
-        href: "/dashboard",
-        color: "text-sky-500"
-    },
-    {
-        label: "Conversation",
-        icon: MessageSquare,
-        href: "/conversation",
-        color: "text-violet-500"
-    },
-    {
-        label: "Image Generation",
-        icon: ImageIcon,
-        href: "/image",
-        color: "text-pink-700"
-    },
-    {
-        label: "Video Generation",
-        icon: VideoIcon,
-        href: "/video",
-        color: "text-orange-700"
-    },
-    {
-        label: "Music Generation",
-        icon: Music,
-        href: "/music",
-        color: "text-emerald-500"
-    },
-    {
-        label: "Code Generation",
-        icon: Code,
-        href: "/code",
-        color: "text-green-500"
-    },
-    {
-        label: "Settings",
-        icon: Settings,
-        href: "/settings",
-        // color: "text-emerald-500"
-    },
-];
 
 interface SidebarProps {
     queryCount: number;
+    isPro : boolean
 };
 
-const Sidebar = ({ queryCount = 0 }: SidebarProps) => {
+const Sidebar = ({ queryCount = 0 , isPro = false}: SidebarProps) => {
     const pathname = usePathname();
     return (
         <div className="py-4 flex flex-col h-full text-white bg-[#111827]">
@@ -84,7 +33,7 @@ const Sidebar = ({ queryCount = 0 }: SidebarProps) => {
                         />
                     </div>
                     <h1 className={cn("text-xl font-bold", montserrat.className)}>
-                        Genius
+                        OriginAI
                     </h1>
                 </Link>
 
@@ -108,6 +57,7 @@ const Sidebar = ({ queryCount = 0 }: SidebarProps) => {
                 </div>
             </div>
             <FreeQueryCounter
+                isPro={isPro}
                 queryCount={queryCount}
             />
         </div>

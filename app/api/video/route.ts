@@ -1,5 +1,6 @@
 import { checkQueryCountVlaid, incrementQueryCount } from "@/lib/api-limit";
-import { auth } from "@clerk/nextjs";
+import { checkIsPro } from "@/lib/subscriptions";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 import Replicate from "replicate";
@@ -10,20 +11,22 @@ const replicate = new Replicate({
 
 export async function POST(req: Request) {
     try {
-        const { userId } = auth();
-        const body = await req.json();
-        const { prompt } = body;
-
-        if (!userId) {
+        const session = await getServerSession();
+        if (!session?.user) {
             return new NextResponse("UNAUTHORIZED", { status: 401 });
         }
+
+        const body = await req.json();
+        const { prompt } = body;
 
         if (!prompt) {
             return new NextResponse("PROMPT_IS_REQUIRED", { status: 400 });
         }
 
         const freeTrial = await checkQueryCountVlaid();
-        if (!freeTrial) {
+        const isPro = await checkIsPro();
+
+        if (!freeTrial && !isPro) {
             return new NextResponse("QUERY_LIMIT_EXCEEDED", { status: 403 });
         }
 
@@ -36,7 +39,9 @@ export async function POST(req: Request) {
             }
         );
 
-        await incrementQueryCount();
+        if (!isPro) {
+            await incrementQueryCount();
+        }
 
         return NextResponse.json(response);
     } catch (error) {

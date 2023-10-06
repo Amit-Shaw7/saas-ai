@@ -1,5 +1,8 @@
 import { checkQueryCountVlaid, incrementQueryCount } from "@/lib/api-limit";
-import { auth } from "@clerk/nextjs";
+import { checkIsPro } from "@/lib/subscriptions";
+import User from "@/models/User";
+import { getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
 import { NextResponse } from "next/server";
 
 import OpenAI from 'openai';
@@ -10,13 +13,13 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
     try {
-        const { userId } = auth();
-        const body = await req.json();
-        const { prompt, amount = 1, resolution = "512x512" } = body;
-
-        if (!userId) {
+        const session = await getServerSession();
+        if (!session?.user) {
             return new NextResponse("UNAUTHORIZED", { status: 401 });
         }
+
+        const body = await req.json();
+        const { prompt, amount = 1, resolution = "512x512" } = body;
 
         if (!openai.apiKey) {
             return new NextResponse("OPENAI_NOT_AUTHORIZED", { status: 500 });
@@ -33,7 +36,9 @@ export async function POST(req: Request) {
         }
 
         const freeTrial = await checkQueryCountVlaid();
-        if (!freeTrial) {
+        const isPro = await checkIsPro();
+
+        if (!freeTrial && !isPro) {
             return new NextResponse("QUERY_LIMIT_EXCEEDED", { status: 403 });
         }
 
@@ -42,9 +47,10 @@ export async function POST(req: Request) {
             n: parseInt(amount, 10),
             size: resolution
         });
-
-        await incrementQueryCount();
-
+        if (!isPro) {
+            await incrementQueryCount();
+        }
+        
         return NextResponse.json(response.data)
     } catch (error) {
         console.log("IMAGE_ERROR" + error);

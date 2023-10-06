@@ -8,10 +8,68 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Check, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { razorpayHandlerResponse } from "@/types";
+import { validatePaymentVerification } from "razorpay/dist/utils/razorpay-utils";
+// import Razorpay from "razorpay";
 
 const ProModal = () => {
   const [isMounted, setIsMounted] = useState(false);
   const { isOpen, onOpen, onClose } = useApp();
+  const session = useSession();
+
+  const createorder = async () => {
+    const data = {
+      price: 50,
+      // email : session.data?.user?.email
+    }
+    try {
+      const response = await axios.post("/api/order", data);
+      if (response.status === 200) {
+        const order = response.data.order;
+        const options = {
+          key: process.env.RAZORPAY_API_KEY, // Enter the Key ID generated from the Dashboard
+          amount: order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+          currency: "INR",
+          name: "Saas",
+          description: "Test Transaction",
+          image: "https://example.com/your_logo",
+          order_id: order.id,
+          handler: async function (response: razorpayHandlerResponse) {
+            try {
+              const res = await axios.post("/api/payment", response);
+              if (res.status === 200) {
+                console.log("Success");
+              }
+            } catch (error) {
+              console.log(error);
+
+            }
+          },
+          prefill: {
+            name: session.data?.user?.name,
+            email: session.data?.user?.email,
+          },
+          notes: {
+            "address": "Razorpay Corporate Office"
+          },
+          theme: {
+            "color": "#3399cc"
+          },
+        };
+        const razorpay = new window.Razorpay(options);
+        razorpay.open();
+
+      }
+
+    } catch (error) {
+      console.log(error);
+    } finally {
+      onClose();
+    }
+
+  }
 
   useEffect(() => {
     setIsMounted(true);
@@ -20,6 +78,7 @@ const ProModal = () => {
   if (!isMounted) {
     return null;
   };
+
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -60,6 +119,7 @@ const ProModal = () => {
 
           <DialogFooter>
             <Button
+              onClick={createorder}
               size="lg"
               variant="premium"
               className="w-full mt-6"

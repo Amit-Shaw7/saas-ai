@@ -14,10 +14,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Empty } from "@/components/empty";
 import Loader from "@/components/loader";
-import { cn } from "@/lib/utils";
-import { UserAvatar } from "@/components/userAvatar";
-import { BotAvatar } from "@/components/botAvatar";
-import ReactMarkdown from "react-markdown";
 import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Image from "next/image";
@@ -42,7 +38,6 @@ const Imagepage = () => {
     const [images, setImages] = useState([]);
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values);
         try {
             setImages([]);
             const response = await axios.post("/api/image", values);

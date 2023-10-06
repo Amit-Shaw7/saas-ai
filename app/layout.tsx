@@ -1,15 +1,16 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ClerkProvider } from '@clerk/nextjs'
 import { AppProvider } from '@/store/AppContext'
 import ProModal from '@/components/proModal'
+import AuthProvider from '@/store/AuthProvider'
+import { CrispProvider } from '@/components/CrispProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Genius',
-  description: 'AI Genius',
+  title: 'OriginAI',
+  description: 'AI OriginAI',
 }
 
 export default function RootLayout({
@@ -18,15 +19,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
+    <AuthProvider>
       <html lang="en">
+        <CrispProvider />
         <body className={inter.className}>
           <AppProvider>
             <ProModal />
             {children}
           </AppProvider>
         </body>
+        <script async src="https://checkout.razorpay.com/v1/checkout.js"></script>
       </html>
-    </ClerkProvider>
+    </AuthProvider>
   )
 }

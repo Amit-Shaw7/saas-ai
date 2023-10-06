@@ -1,5 +1,6 @@
 import {
     Code,
+    FilesIcon,
     ImageIcon,
     LayoutDashboard,
     MessageSquare,
@@ -86,9 +87,9 @@ export const routes = [
         color: "text-green-500"
     },
     {
-        label: "Settings",
-        icon: Settings,
-        href: "/settings",
+        label: "Account",
+        icon: FilesIcon,
+        href: "/account",
         // color: "text-emerald-500"
     },
 ];

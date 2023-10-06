@@ -12,7 +12,7 @@ const Loader = () => {
                 />
             </div>
             <p className="text-gray-500 text-sm text-center font-semibold">
-                Genius is thinking...
+                OriginAI is thinking...
             </p>
         </div>
     )

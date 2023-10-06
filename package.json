@@ -14,21 +14,27 @@
     "@radix-ui/react-avatar": "^1.0.3",
     "@radix-ui/react-dialog": "^1.0.4",
     "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-progress": "^1.0.3",
     "@radix-ui/react-select": "^1.2.2",
     "@radix-ui/react-slot": "^1.0.2",
+    "@types/next-auth": "^3.15.0",
     "@types/node": "20.6.3",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.16",
     "axios": "^1.5.0",
+    "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "crisp-sdk-web": "^1.0.21",
     "eslint": "8.50.0",
     "eslint-config-next": "13.5.2",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.279.0",
     "mongoose": "^7.5.2",
     "next": "13.5.2",
+    "next-auth": "^4.22.1",
     "openai": "^4.10.0",
     "postcss": "8.4.30",
     "razorpay": "^2.9.2",
@@ -44,5 +50,9 @@
     "typescript": "5.2.2",
     "zod": "^3.22.2",
     "zustand": "^4.4.1"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.4",
+    "@types/jsonwebtoken": "^9.0.3"
   }
 }

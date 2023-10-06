@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, PersonStanding } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,14 +17,14 @@ import { ChatCompletionMessageParam } from "openai/resources/chat/index";
 import { Empty } from "@/components/empty";
 import Loader from "@/components/loader";
 import { cn } from "@/lib/utils";
-import { UserAvatar } from "@/components/userAvatar";
 import { BotAvatar } from "@/components/botAvatar";
 import ReactMarkdown from "react-markdown";
 import { useApp } from "@/store/AppContext";
+import { UserAvatar } from "@/components/userAvatar";
 
 const Codepage = () => {
     const router = useRouter();
-    const {onOpen} = useApp();
+    const { onOpen } = useApp();
     const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -36,7 +36,6 @@ const Codepage = () => {
     const isLoading = form.formState.isSubmitting;
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values);
         try {
             const userMessage: ChatCompletionMessageParam = {
                 role: "user",

@@ -8,16 +8,21 @@ import { Zap } from "lucide-react";
 import { useApp } from "@/store/AppContext";
 
 interface FreeCounterProps {
-    queryCount: number
+    queryCount: number,
+    isPro : boolean
 }
 
-const FreeQueryCounter = ({ queryCount = 0 }: FreeCounterProps) => {
+const FreeQueryCounter = ({ isPro = false, queryCount = 0 }: FreeCounterProps) => {
     const { onOpen } = useApp();
 
     const [mounted, setMounted] = useState(false);
     useEffect(() => {
         setMounted(true);
     }, []);
+
+    if(isPro) {
+        return null
+    }
 
     return (
         <div className="px-3">

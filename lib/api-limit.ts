@@ -1,53 +1,64 @@
-import { auth } from "@clerk/nextjs";
-import mongoose from "mongoose";
-import LimitQuery from "@/models/LimitQuery";
 import { MAX_FREE_COUNT } from "@/constants";
-import {connectToMongo} from "@/utils/db";
+import { connectToMongo } from "@/utils/db";
+import User from "@/models/User";
+import Subscription from "@/models/Subscription";
+import { getServerSession } from "next-auth";
 
 export const incrementQueryCount = async () => {
     await connectToMongo();
-    const { userId } = auth();
-    if (!userId) {
+    const session = await getServerSession();
+    if (!session?.user) {
         return;
     }
 
-    const limitQuery = await LimitQuery.findOne({ userId });
-    if (!limitQuery) {
-        await LimitQuery.create({
-            userId,
-            queryCount: 1
+    const user = await User.findOne({ email: session?.user?.email });
+    const subscription = await Subscription.findOne({ userId: user?._id });
+    if (!subscription) {
+        await Subscription.create({
+            userId : user?._id,
+            freeQueryCount: 1,
+            subscription : "FREE",
+            subscriptionType : "PENDING"
         })
     } else {
-        limitQuery.queryCount++;
-        await limitQuery.save();
+        subscription.freeQueryCount++;
+        await subscription.save();
     }
 
 };
 
 export const checkQueryCountVlaid = async () => {
-    const { userId } = auth();
+    const session = await getServerSession();
     await connectToMongo();
 
-    if (!userId) {
+    if (!session?.user) {
         return false;
     }
+    const user = await User.findOne({ email: session?.user?.email });
+    const subscription = await Subscription.findOne({ userId: user?._id });
 
-    const exists = await LimitQuery.findOne({ userId });
-    if (!exists || exists.queryCount < MAX_FREE_COUNT) {
+    
+
+    if (!subscription || subscription.freeQueryCount < MAX_FREE_COUNT) {
         return true;
     } else {
         return false;
-        
+
     }
 }
 
 export const getQueryCount = async () => {
     await connectToMongo();
-    const { userId } = auth();
-    if (!userId) {
+    const session = await getServerSession();
+
+    if (!session?.user) {
         return 0;
     }
 
-    const limitQuery = await LimitQuery.findOne({ userId });
-    return limitQuery.queryCount;
+    const user = await User.findOne({ email: session?.user?.email });
+    const subscription = await Subscription.findOne({ userId: user?._id });
+    if (!subscription) {
+        return 0;
+    }
+    return subscription.freeQueryCount;
 }

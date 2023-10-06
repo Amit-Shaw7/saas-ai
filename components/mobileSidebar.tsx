@@ -11,10 +11,11 @@ import Sidebar from "@/components/sidebar";
 import { useEffect, useState } from "react";
 
 interface FreeCounterProps {
-    queryCount?: number  
+    queryCount?: number ;
+    isPro?: boolean
 }
 
-const MobilleSidebar = ({queryCount = 0}:FreeCounterProps) => {
+const MobilleSidebar = ({queryCount = 0 , isPro = false}:FreeCounterProps) => {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -33,7 +34,7 @@ const MobilleSidebar = ({queryCount = 0}:FreeCounterProps) => {
             </SheetTrigger>
 
             <SheetContent side="left" className="p-0">
-                <Sidebar queryCount={queryCount}/>
+                <Sidebar  isPro={isPro} queryCount={queryCount}/>
             </SheetContent>
         </Sheet>
     )

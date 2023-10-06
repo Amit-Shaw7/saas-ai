@@ -32,7 +32,6 @@ const VideoPage = () => {
     const [video, setVideo] = useState<string>();
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values);
         try {
             setVideo(undefined);
             const response = await axios.post("/api/video", values);
