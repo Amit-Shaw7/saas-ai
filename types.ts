@@ -27,7 +27,10 @@ export type callbackType = {
     account: {
         provider: string,
         access_token: string
-    }
+    },
+    profile? : object,
+    email? : string,
+    credentials? : object
 }
 
 export type razorpayHandlerResponse = {

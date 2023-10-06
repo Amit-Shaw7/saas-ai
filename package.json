@@ -55,6 +55,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.4",
-    "@types/jsonwebtoken": "^9.0.3"
+    "@types/jsonwebtoken": "^9.0.3",
+    "encoding": "^0.1.13"
   }
 }

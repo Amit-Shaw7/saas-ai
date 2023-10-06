@@ -4,11 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/models/User";
 import bcrypt from "bcryptjs";
 import { connectToMongo } from "@/utils/db";
-import { string } from "zod";
 import { callbackType } from "@/types";
-import axios from "axios";
-import { NextResponse } from "next/server";
-import { registerUser, registerUserUsingProviders } from "@/store/actions/AuthActions";
 import { SessionStrategy } from "next-auth";
 
 const sessionStrategy: SessionStrategy = "jwt";
@@ -59,25 +55,25 @@ export const authOptions = {
     },
     // debug: process.env.NODE_ENV === "development",
     callbacks: {
-        async signIn(data: callbackType) {
+        async signIn({ user, account, profile, email, credentials }:any) {
             await connectToMongo();
-            data.user.access_token = data.account.access_token;
-            if (data.account.provider === 'google') {
+            user.access_token = account.access_token;
+            if (account.provider === 'google') {
                 // Check if the user already exists in your database
-                const existingUser = await User.findOne({ email: data.user.email });
+                const existingUser = await User.findOne({ email: user.email });
                 console.log(existingUser);
                 
 
                 if (!existingUser) {
                     // If the user doesn't exist, create a new user document in MongoDB
                     await User.create({
-                        name: data.user.name,
-                        email: data.user.email,
-                        password: data.user.access_token,
+                        name: user.name,
+                        email: user.email,
+                        password: "no password",
                     });
                 }
             }
-            return data.user;
+            return user;
         }
     }
 }
