@@ -32,7 +32,7 @@ const ProModal = () => {
           key: process.env.RAZORPAY_API_KEY, // Enter the Key ID generated from the Dashboard
           amount: order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
           currency: "INR",
-          name: "Saas",
+          name: "OriginAI",
           description: "Test Transaction",
           image: "https://example.com/your_logo",
           order_id: order.id,
@@ -55,7 +55,7 @@ const ProModal = () => {
             "address": "Razorpay Corporate Office"
           },
           theme: {
-            "color": "#3399cc"
+            "color": "#682ad5"
           },
         };
         const razorpay = new window.Razorpay(options);
