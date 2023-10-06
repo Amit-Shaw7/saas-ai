@@ -10,13 +10,13 @@ const LandingHero = () => {
     const { data, status } = useSession();
     return (
         <div className=' h-[90vh] text-white font-bold py-36 text-center space-y-10'>
-            <div className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl space-y-5 font-extrabold'>
-                <h1>AI tool to help you in</h1>
-                <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600'>
+            <div className='space-y-5 font-extrabold'>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">AI tool to help you in</h1>
+                <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600'>
                     <TypeWriterComponent
                         options={{
                             strings: [
-                                "Chatbot",
+                                "As a Chatbot",
                                 "Photo Generation",
                                 "Video Generation",
                                 "Music Generation",

@@ -1,6 +1,12 @@
 "use client";
 import CrispChat from "@/components/CrispChat";
+import { useSession } from "next-auth/react";
 
 export const CrispProvider = () => {
-    return <CrispChat />
+    const {status} = useSession();
+    return (
+        <>
+           {status === "authenticated" && <CrispChat />}
+        </>
+    )
 }

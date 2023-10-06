@@ -53,8 +53,10 @@ const Login = () => {
         <div className='relative w-full h-full flex items-center justify-center'>
             <Card className='w-[320px] md:w-[400px] flex items-center justify-center flex-col'>
                 <CardHeader className='space-y-4'>
-                    <CardDescription className='text-center'>
-                        Hey Welcome to OriginAI, signin to increase your productivity using AI tools.
+                    <CardDescription className='text-md font-bold text-center'>
+                        Hey Welcome to
+                        <span className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent'> OriginAI</span>
+                        , sign in to increase your productivity using AI tools.
                     </CardDescription>
                 </CardHeader>
 
@@ -146,10 +148,13 @@ const Login = () => {
                             Sign up with Github
                         </Button>
                     </div>
+                    <p className='text-xs text-gray-500 text-center'>
+                        By signing up you agreed to our terms and condition
+                    </p>
                 </CardContent>
 
-                <CardFooter className='text-xs text-gray-500 text-center'>
-                    By clicking on submit you agreed to our terms and condition
+                <CardFooter className='text-gray-500 text-center font-semibold text-sm'>
+                    Already have an account?<Link href="/login" className='text-primary underline'>&nbsp;Login</Link>
                 </CardFooter>
             </Card>
 

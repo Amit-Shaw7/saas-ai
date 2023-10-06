@@ -10,13 +10,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { loginUser, registerUser } from "@/store/actions/AuthActions";
 import { useState } from 'react';
-import { registerUserType } from '@/types';
 import Link from 'next/link';
 
 const Login = () => {
-    const { data, status } = useSession();
+    const { status } = useSession();
     const router = useRouter();
     const [error, setError] = useState<string>("");
     const {
@@ -57,8 +55,8 @@ const Login = () => {
                 <CardHeader className='space-y-4'>
                     <CardDescription className='text-md font-bold text-center'>
                         Hey Welcome to
-                        OriginAI
-                        , signin to increase your productivity using AI tools.
+                        <span className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent'> OriginAI</span>
+                        , sign in to increase your productivity using AI tools.
                     </CardDescription>
                 </CardHeader>
 
@@ -99,7 +97,7 @@ const Login = () => {
 
                         <Button
                             variant="premium"
-                            disabled={isLoading}
+                            disabled={isLoading || isSubmitting}
                             className="col-span-12 lg:col-span-2 w-full"
                             type="submit"
                         >
@@ -115,6 +113,7 @@ const Login = () => {
                             onClick={() => signIn('google', {
                                 callbackUrl: '/dashboard',
                             })}
+                            disabled={isSubmitting}
                             variant="outline"
                             className='rounded-sm w-full'
                         >
@@ -144,8 +143,8 @@ const Login = () => {
                     </div>
                 </CardContent>
 
-                <CardFooter className='text-xs text-gray-500 text-center'>
-                    By clicking on submit you agreed to our terms and condition
+                <CardFooter className='text-gray-500 text-center font-semibold text-sm'>
+                    Don&apos;t have an account?<Link href="/signup" className='text-primary underline'>&nbsp;Signup</Link> 
                 </CardFooter>
             </Card>
 
