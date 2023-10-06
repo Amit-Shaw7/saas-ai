@@ -24,7 +24,7 @@ const LandingNavbar = () => {
                 <div className="relative h-8 w-8 mr-4">
                     <Image
                         fill
-                        src="/logo.png"
+                        src="/Logo.png"
                         alt="OriginAI"
                     />
                 </div>

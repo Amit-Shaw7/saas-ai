@@ -7,7 +7,7 @@ const Loader = () => {
             <div className="h-10 w-10 relative animate-spin">
                 <Image
                     fill
-                    src="/logo.png"
+                    src="/Logo.png"
                     alt="Loading..."
                 />
             </div>
