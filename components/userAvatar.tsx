@@ -7,10 +7,17 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
+import { useRouter } from "next/navigation";
 
 export function UserAvatar() {
     const { data } = useSession();
+    const router = useRouter();
     const user = data?.user;
+
+    const handleLogout = async () => {
+        await signOut();
+        router.push('/');
+    }
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -31,7 +38,7 @@ export function UserAvatar() {
                         </p>
                     </div>
                     <div className="grid gap-2">
-                        <Button onClick={() => signOut()} variant='default'>Logout</Button>
+                        <Button onClick={handleLogout} variant='default'>Logout</Button>
                     </div>
                 </div>
             </PopoverContent>

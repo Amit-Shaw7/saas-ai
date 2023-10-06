@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'OriginAI',
-  description: 'AI OriginAI',
+  description: 'Best Ai tool for your daily requirements',
 }
 
 export default function RootLayout({

@@ -13,6 +13,7 @@ import { z } from 'zod';
 import { registerUser } from "@/store/actions/AuthActions";
 import { useState } from 'react';
 import { registerUserType } from '@/types';
+import Link from 'next/link';
 
 const Login = () => {
     const { data, status } = useSession();
@@ -152,17 +153,19 @@ const Login = () => {
                 </CardFooter>
             </Card>
 
-            <div className='absolute top-4 left-4 flex items-center gap-x-3'>
-                <Image
-                    className='mx-auto'
-                    height="60"
-                    width="60"
-                    src="/logo.png"
-                    alt='Login'
-                />
-                <h3 className='text-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent border-0'>
-                    OriginAI
-                </h3>
+            <div className='absolute top-4 left-4'>
+                <Link href="/" className='flex items-center gap-x-3'>
+                    <Image
+                        className='mx-auto'
+                        height="60"
+                        width="60"
+                        src="/logo.png"
+                        alt='Login'
+                    />
+                    <h3 className='text-2xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent border-0'>
+                        OriginAI
+                    </h3>
+                </Link>
             </div>
         </div>
     );

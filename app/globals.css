@@ -72,6 +72,22 @@ body,
   }
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #111827;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ae54ef;
+  border-radius: 10px
+}
+
 @layer base {
   * {
     @apply border-border;
