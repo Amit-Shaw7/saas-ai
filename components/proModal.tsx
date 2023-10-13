@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { razorpayHandlerResponse } from "@/types";
-import { validatePaymentVerification } from "razorpay/dist/utils/razorpay-utils";
 // import Razorpay from "razorpay";
 
 const ProModal = () => {
