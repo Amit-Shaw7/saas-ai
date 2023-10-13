@@ -40,6 +40,7 @@ const ProModal = () => {
               const res = await axios.post("/api/payment", response);
               if (res.status === 200) {
                 console.log("Success");
+                window.location.reload();
               }
             } catch (error) {
               console.log(error);
