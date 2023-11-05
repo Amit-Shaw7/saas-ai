@@ -34,7 +34,7 @@ const MobilleSidebar = ({ queryCount = 0, isPro = false }: FreeCounterProps) => 
                 </Button>
             </SheetTrigger>
 
-            <SheetContent side="left" className="p-0">
+            <SheetContent side="left" className="p-0 m-0 bg-[#111827]">
                 <SheetClose className="text-white" />
                 <Sidebar isPro={isPro} queryCount={queryCount} />
             </SheetContent>

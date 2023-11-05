@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 
 const LandingLayout = ({ children } : { children: ReactNode }) => {
     return (
-        <main className='h-full bg-[#111827] overflow-auto '>
+        <main className='h-[100vh] bg-[#111827] overflow-auto '>
             <div className='mx-auto max-w-screen-xl h-full'>
                 {children}
             </div>

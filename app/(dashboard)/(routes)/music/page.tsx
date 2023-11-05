@@ -16,6 +16,7 @@ import { Empty } from "@/components/empty";
 import Loader from "@/components/loader";
 import { useState } from "react";
 import { useApp } from "@/store/AppContext";
+import toast from "react-hot-toast";
 
 const MusicPage = () => {
     const router = useRouter();
@@ -41,6 +42,8 @@ const MusicPage = () => {
         } catch (error: any) {
             if (error?.response?.status === 403) {
                 onOpen();
+            } else if (error?.response?.status === 504) {
+                toast.error("Request timeout as Next Js offers only 10s for a free tier. Try again later.");
             }
         } finally {
             router.refresh();

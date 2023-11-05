@@ -21,6 +21,7 @@ import { BotAvatar } from "@/components/botAvatar";
 import ReactMarkdown from "react-markdown";
 import { useApp } from "@/store/AppContext";
 import { UserAvatar } from "@/components/userAvatar";
+import toast from "react-hot-toast";
 
 const Codepage = () => {
     const router = useRouter();
@@ -51,6 +52,9 @@ const Codepage = () => {
         } catch (error: any) {
             if (error?.response?.status === 403) {
                 onOpen();
+            }
+            if(error?.response?.status === 504) {
+                toast.error("Request timeout as Next Js offers only 10s for a free tier. Try again later.");
             }
         } finally {
             router.refresh();

@@ -5,6 +5,7 @@ import { AppProvider } from '@/store/AppContext'
 import ProModal from '@/components/proModal'
 import AuthProvider from '@/store/AuthProvider'
 import { CrispProvider } from '@/components/CrispProvider'
+import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,6 +27,7 @@ export default function RootLayout({
           <AppProvider>
             <ProModal />
             {children}
+            <Toaster position='top-center'/>
           </AppProvider>
         </body>
         <script async src="https://checkout.razorpay.com/v1/checkout.js"></script>

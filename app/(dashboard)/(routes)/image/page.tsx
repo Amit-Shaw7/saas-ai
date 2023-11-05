@@ -19,6 +19,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import Image from "next/image";
 import { Card, CardFooter } from "@/components/ui/card";
 import { useApp } from "@/store/AppContext";
+import toast from "react-hot-toast";
 
 const Imagepage = () => {
     const { onOpen } = useApp();
@@ -47,6 +48,8 @@ const Imagepage = () => {
         } catch (error: any) {
             if (error?.response?.status === 403) {
                 onOpen();
+            } else if (error?.response?.status === 504) {
+                toast.error("Request timeout as Next Js offers only 10s for a free tier. Try again later.");
             }
         } finally {
             router.refresh();

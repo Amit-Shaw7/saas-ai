@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 import { useApp } from "@/store/AppContext";
 import { UserAvatar } from "@/components/userAvatar";
 import { BotAvatar } from "@/components/botAvatar";
+import toast from "react-hot-toast";
 
 const Conversation = () => {
     const { onOpen } = useApp();
@@ -49,7 +50,9 @@ const Conversation = () => {
             setMessages((prev) => [...prev, userMessage, response.data])
             form.reset();
         } catch (error: any) {
-            if (error?.response?.status === 403) {
+            if (error?.response?.status === 504) {
+                toast.error("Request timeout as Next Js offers only 10s for a free tier. Try again later.");
+            } else if (error?.response?.status === 403) {
                 onOpen();
             }
         } finally {

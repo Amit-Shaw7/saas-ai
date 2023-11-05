@@ -25,10 +25,10 @@ const FreeQueryCounter = ({ isPro = false, queryCount = 0 }: FreeCounterProps) =
     }
 
     return (
-        <div className="px-3">
+        <div className="px-3 mb-6">
             <Card className="bg-white/10 border-0">
                 <CardContent className="py-6">
-                    <div className="text-center text-white text-sm mb-4 space-y-2">
+                    <div className="text-center text-white text-xs md:text-sm mb-4 space-y-2">
                         <p>{queryCount} / {MAX_FREE_COUNT} Free Queries generated</p>
                         <Progress
                             className="h-3"
