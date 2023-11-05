@@ -133,7 +133,7 @@ const Login = () => {
                             />
                             Sign up with Google
                         </Button>
-                        <Button
+                        {/* <Button
                             onClick={() => signIn('github')}
                             variant="outline"
                             className='rounded-sm w-full'
@@ -146,7 +146,7 @@ const Login = () => {
                                 alt='Login with Google'
                             />
                             Sign up with Github
-                        </Button>
+                        </Button> */}
                     </div>
                     <p className='text-xs text-gray-500 text-center'>
                         By signing up you agreed to our terms and condition

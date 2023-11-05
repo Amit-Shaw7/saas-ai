@@ -126,7 +126,7 @@ const Login = () => {
                             />
                             Sign in with Google
                         </Button>
-                        <Button
+                        {/* <Button
                             onClick={() => signIn('github')}
                             variant="outline"
                             className='rounded-sm w-full'
@@ -139,7 +139,7 @@ const Login = () => {
                                 alt='Login with Google'
                             />
                             Sign in with Github
-                        </Button>
+                        </Button> */}
                     </div>
                 </CardContent>
 
