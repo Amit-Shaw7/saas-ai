@@ -16,7 +16,7 @@ export function UserAvatar() {
 
     const handleLogout = async () => {
         await signOut();
-        router.push('/');
+        // router.push('/');
     }
     return (
         <Popover>
