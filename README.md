@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<h1 align="center">
+  <br>
+  <a href="https://originai.vercel.app/"><img src="https://res.cloudinary.com/amitkumarshaw/image/upload/v1699539612/logo_yesisy.jpg" alt="managet" width="200"></a>
+  <br>
+  Origin Ai
+  <br>
+</h1>
 
-First, run the development server:
+<h4 align="center">An Ai tool</h4>
+
+<p align="center">
+  <a href="https://nextjs.org/" >
+    <img width="20px" src="https://amitshawv2.vercel.app/assets/skills/next.svg" alt="Next js">
+  </a>
+  
+  <a href="https://tailwindcss.com/">
+      <img height="20px" src="https://amitshawv2.vercel.app/assets/skills/tailwind.svg" alt="material ui">
+  </a>
+  
+   <a href="https://www.mongodb.com/">
+    <img height="20px" width="30px" src="https://amitshawv2.vercel.app/assets/skills/mongodb.svg" alt="Mongo db">
+  </a>
+
+</p>
+
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#how-to-use">How To Use</a> •
+  <a href="#credits">Credits</a> •
+  <a href="#related">Related</a> •
+  <a href="#license">License</a>
+</p>
+
+<hr/>
+
+## Preview
+
+Will be added soon
+
+
+## Screenshots
+
+![screenshot](https://res.cloudinary.com/amitkumarshaw/image/upload/v1700037845/Screenshot_286_ina5au.png)
+
+<hr/>
+
+![screenshot](https://res.cloudinary.com/amitkumarshaw/image/upload/v1700037839/Screenshot_310_yoiodn.png)
+
+<hr/>
+
+![screenshot](https://res.cloudinary.com/amitkumarshaw/image/upload/v1700037843/Screenshot_309_tlhdgv.png)
+
+<hr/>
+
+
+## Key Features
+
+* Complete user authentication.
+* It can be used as a chatbot , image generation , video generation , music generation , code generation.
+* It is designed as a SAAS app that's why a total of 5 free generation will be given if the want's more they can subscribe(Test Mode).
+* A beautiful landing page.
+* Fully responsive.
+
+## How to run in your system
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone this repository
+$ git clone ...
+
+# Go into the frontend
+$ cd saas-ai
+
+# Install dependencies
+$ npm install
+
+# Create a .env file and add the below varibales
+# OPENAI_API_KEY - create a "open ai" account and add your api key here
+# REPLICATE_API_KEY - create a "replicate" account and add your api key here
+# MONGO_URI - your mongodb ui here
+# GOOGLE_CLIENT_ID - your google client id if doesnot exist create one in your google console
+# GOOGLE_CLIENT_SECRET - your google client id if doesnot exist create one in your google console
+# NEXTAUTH_URL - http://localhost:3000
+# NEXTAUTH_SECRET - any secret
+
+# Run the app
+
+$ npm run dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How to use
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*** Some of the generation may crash without any response because the next js default request timeout is 1000ms and getting response open ai models take more than that I am working on it to fix it and it will be fixed soon. ***
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Signup through email or through google.
+- Login to it.
+- start asking question and you will get your answers.
 
-## Learn More
+## Credits
 
-To learn more about Next.js, take a look at the following resources:
+This web app uses the following technologies:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Node.js](https://nodejs.org/)
+- [Next.js ](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Shadcn UI](https://ui.shadcn.com/)
+- [Open AI](https://openai.com/)
+- [Replicate ai](https://replicate.com/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+This web app uses the following important npm packages:
 
-## Deploy on Vercel
+- [react-icons](https://react-icons.github.io/react-icons/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Related
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[Origin Ai](https://originai.vercel.app/) - Deployed version this web app.
+
+
+## You may also like...
+
+- [Youtube Clone](https://github.com/Amit-Shaw7/yt-clone-frontend) - A youtube clone.
+- [Pijja](https://github.com/Amit-Shaw7/pizzaApp---Frontend) - A dummy pizza ordering webapp
+- [Connect](https://github.com/Amit-Shaw7/connect) - A social media web app
+- [Origin AI](https://github.com/Amit-Shaw7/saas-ai) - An ai tool like chatgpt
+- [Managet](https://github.com/Amit-Shaw7/kanban-task-management) - A Task management web app with drag and drop feature
+
+## License
+
+MIT
+
+---
+
+> [Amit Shaw](https://amitshawv2.vercel.app) &nbsp;&middot;&nbsp;
+> GitHub [Amit-Shaw7](https://github.com/Amit-Shaw7) &nbsp;&middot;&nbsp;
+> LinkedIn [amit-shaw-a95121230](https://www.linkedin.com/in/amit-shaw-a95121230/)
+
